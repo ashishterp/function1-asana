@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Asana do
+describe Function1::Asana do
   it 'does stuff' do
-    pending # no code yet
+    skip # no code yet
   end
 end
