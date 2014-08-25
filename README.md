@@ -1,6 +1,8 @@
 # Function1::Asana
 
-TODO: Write a gem description
+[![Coverage Status](https://img.shields.io/coveralls/ashishterp/function1-asana.svg)](https://coveralls.io/r/ashishterp/function1-asana?branch=master)
+
+Asana Client
 
 ## Installation
 
