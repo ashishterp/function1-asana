@@ -1,8 +1,15 @@
 require 'faraday'
 require 'asana/configuration'
+require 'asana/users'
+require 'asana/tasks'
+require 'asana/middleware/response/parse_json'
 
 module Asana
   class Client
+    include Asana::Client::Users
+    include Asana::Client::Tasks
+
+
     # @return [Configuration] Config instance
     attr_reader :config
 
@@ -13,7 +20,7 @@ module Asana
     # @return [Asana::User] Current user or nil
     def current_user(reload = false)
       return @current_user if @current_user && !reload
-      @current_user = users.find(:id => 'me')
+      @current_user = user('me')
     end
 
     def initialize
@@ -50,10 +57,13 @@ module Asana
     #
     # Retry middleware if retry is true
     def build_connection
-      conn = Faraday.new(:url => 'https://app.asana.com/api/1.0/') do |faraday|
+      conn = Faraday.new(:url => 'https://app.asana.com/') do |faraday|
         faraday.request  :url_encoded             # form-encode POST params
         faraday.response :logger                  # log requests to STDOUT
         faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
+        faraday.basic_auth @config.api_key, '' if @config.api_key
+        faraday.headers['Content-Type'] = 'application/json'
+        faraday.use Asana::Middleware::Response::ParseJson
       end
     end
 
