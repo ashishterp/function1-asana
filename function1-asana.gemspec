@@ -1,14 +1,14 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'function1/asana/version'
+require 'asana/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "function1-asana"
-  spec.version       = Function1::Asana::VERSION
+  spec.version       = Asana::VERSION
   spec.authors       = ["Ashish Bhutiani"]
   spec.email         = ["ashish@function1.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
+  spec.summary       = "Asana Client"
   spec.description   = %q{TODO: Write a longer description. Optional.}
   spec.homepage      = ""
   spec.license       = "MIT"
@@ -28,4 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry-remote"
   spec.add_development_dependency "pry-nav"
   spec.add_development_dependency "coveralls"
+
+  spec.add_runtime_dependency "faraday"
 end
