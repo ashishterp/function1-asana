@@ -15,7 +15,7 @@ module Asana
           return unless type == 'application/json'
 
           unless env[:body].strip.empty?
-            env[:body] = JSON.parse(env[:body])
+            env[:body] = JSON.parse(env[:body])["data"]
           end
         end
       end
